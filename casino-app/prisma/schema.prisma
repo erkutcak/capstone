@@ -66,7 +66,7 @@ model Game {
   name          String?
 
   transactions  Transaction[]
+  users User[]
   @@map(name: "games")
 
-  users User[]
 }
