@@ -68,5 +68,4 @@ model Game {
   transactions  Transaction[]
   users User[]
   @@map(name: "games")
-
 }
