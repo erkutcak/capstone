@@ -25,9 +25,6 @@ model User {
   transactions  Transaction[]
   @@map(name: "users")
 
-  // game Game? @relation(fields: [gameId], references: [id])
-  // gameId Int
-
   wallet Wallet?
 }
 
@@ -66,6 +63,5 @@ model Game {
   name          String
 
   transactions  Transaction[]
-  // users User[]
   @@map(name: "games")
 }
