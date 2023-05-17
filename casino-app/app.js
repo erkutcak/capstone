@@ -3,28 +3,27 @@ import express from "express";
 import prisma from "./lib/prisma";
 
 const App = () => {
+    const app = express();
+    
     useEffect(() => {
-        const app = express();
         app.use(express.json());
 
-        const PORT = process.env.PORT || 3000;
+        const PORT = process.env.PORT || 5555;
 
         app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
     }, []);
     
-    useEffect(() => {
-        const getUsers = async () => {
+    app.get("/users", async (req, res) => {
         try {
-            const response = await fetch('/users');
-            const users = await response.json();
-            console.log(users);
-        } catch (error) {
-            console.error('Something went wrong:', error);
-        }
-        };
+        const users = await prisma.user.findMany()
     
-        getUsers();
-    }, []);
+        res.json(users)
+        } catch (error) {
+        res.status(500).json({
+            message: "Something went wrong",
+        })
+        }
+    })
 };
 
 export default App;
