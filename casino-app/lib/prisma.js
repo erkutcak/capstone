@@ -1,32 +1,18 @@
-// lib/prisma.ts
-import { useEffect } from 'react';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
-let prisma;
+let prisma; 
 
 if (process.env.NODE_ENV === 'production') {
-  prisma = new PrismaClient();
-} else {
-  if (!window.prisma) {
-    window.prisma = new PrismaClient();
+  prisma = new PrismaClient({
+    log: ['query', 'info', 'warn', 'error'],
+  });
+} else { 
+  if (!global.prisma) {
+    global.prisma = new PrismaClient({
+      log: ['query', 'info', 'warn', 'error'],
+    });
   }
-  prisma = window.prisma;
+  prisma = global.prisma; 
 }
 
-const PrismaContext = React.createContext();
-
-const PrismaProvider = ({ children }) => {
-  useEffect(() => {
-    return () => {
-      prisma.$disconnect();
-    };
-  }, []);
-
-  return (
-    <PrismaContext.Provider value={prisma}>
-      {children}
-    </PrismaContext.Provider>
-  );
-};
-
-export { PrismaProvider, PrismaContext };
+export default prisma;
