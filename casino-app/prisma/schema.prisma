@@ -25,8 +25,8 @@ model User {
   transactions  Transaction[]
   @@map(name: "users")
 
-  game Game? @relation(fields: [gameId], references: [id])
-  gameId Int?
+  // game Game? @relation(fields: [gameId], references: [id])
+  // gameId Int
 
   wallet Wallet?
 }
@@ -50,7 +50,7 @@ model Transaction {
 
 model Wallet {
   id            Int   @id @default(autoincrement())
-  balance       Int
+  balance       Int   @default(1000)
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
 
@@ -66,6 +66,6 @@ model Game {
   name          String
 
   transactions  Transaction[]
-  users User[]
+  // users User[]
   @@map(name: "games")
 }
