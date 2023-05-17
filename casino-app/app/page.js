@@ -8,9 +8,6 @@ export default function Home() {
       <Link href='/dashboard'>
         <h1>Login</h1>
       </Link>
-      <Link href='/wallet'>
-        <h1>Wallet</h1>
-      </Link>
     </div>
   )
 }
