@@ -1,15 +1,14 @@
 import prisma from "../../lib/prisma";
+import Link from "next/link";
 
-
-async function main() {
+async function getUsers() {
     const users = await prisma.user.findMany()
-    const data = await users
     console.log(users);
-    return data
+    return users
 }
 
 export default async function Dashboard () {
-    const data = await main()
+    const data = await getUsers()
     console.log(data);
     return (
         <div>
@@ -23,6 +22,9 @@ export default async function Dashboard () {
                     )
                 })}
             </ul>
+        <a href="/api/auth/logout">
+            <h1>Logout</h1>
+        </a>
         </div>
     )
 }
