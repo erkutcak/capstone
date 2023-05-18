@@ -43,7 +43,7 @@ animation: flicker 1s linear infinite;
     width: 400px;
     height: auto;
     border-radius: 50%;
-    box-shadow: 0 4px 8px 0 rgba(218, 165, 32, 0.5), 0 6px 20px 0 rgba(218, 165, 32, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(218, 165, 32, 0.5), 0 6px 20px 0 rgba(218, 165, 32, 0.89);
     margin-bottom: 30px;
 }
 

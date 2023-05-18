@@ -7,7 +7,6 @@ import logo from '../public/logo3.png'
 
 export default function Home() {
   return (
-
     <div className='homepage'>
       <h3 className='neon-title'>Welcome to,</h3>
       <h1 className="neon" data-text="U">HI<span className="flicker-slow">G</span>H<span className="flicker-fast"> R</span>OL<span className="flicker-slow">L</span>E<span className="flicker-fast">R</span></h1>
