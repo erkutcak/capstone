@@ -24,7 +24,7 @@ export default async function Navbar () {
             <Link href="/wallet">
                 <button className="nav-button">Wallet</button>
             </Link>
-            <a href="/api/auth/logout?returnTo=/">
+            <a href="/api/auth/logout">
                 <button className="nav-button">Logout</button>
             </a>
         </div>
