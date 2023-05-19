@@ -13,8 +13,8 @@ datasource db {
 }
 
 model User {
-  id            Int    @id @default(autoincrement())
-  username      String   @unique
+  id            Int    @id @default(autoincrement()) 
+  username      String
   first_name    String?
   last_name     String?
   profile_pic   String?
@@ -35,7 +35,7 @@ model Transaction {
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
   @@map(name: "transactions")
 
-  user          User @relation(fields: [userId], references: [id])
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId        Int
 
   wallet        Wallet @relation(fields: [walletId], references: [id])
@@ -54,7 +54,7 @@ model Wallet {
   transactions  Transaction[]
   @@map(name: "wallets")
 
-  user          User @relation(fields: [userId], references: [id])
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId        Int @unique
 }
 
