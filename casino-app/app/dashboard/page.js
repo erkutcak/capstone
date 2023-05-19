@@ -1,32 +1,24 @@
 import prisma from "../../lib/prisma";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-// import '../styles/navbar.css';
 import '../styles/dashboard.css';
 
-// async function getUsers() {
-//     const users = await prisma.user.findMany()
-//     return users
-// }
-
 export default async function Dashboard () {
-    // const data = await getUsers()
     return (
         <div>
             <Navbar/>
-            <div className="dash-body">dashboard</div>
-            {/* <ul>
-                {data.map((user) => {
-                    return (
-                    <li>
-                        {user.username}
-                    </li>
-                    )
-                })}
-            </ul>
-        <a href="/api/auth/logout">
-            <h1>Logout</h1>
-        </a> */}
+            <h1 className="dash-title">My Dashboard</h1>
+            <div className="dash-body">
+                <div className="recently-played">
+                    <h3>Recently Played Games</h3>
+                </div>
+                <div className="recent-transactions">
+                    <h3>Recent Transactions</h3>
+                </div>
+                <div className="leaderboard">
+                    <h3>Leaderboard</h3>
+                </div>
+            </div>
         </div>
     )
 }
