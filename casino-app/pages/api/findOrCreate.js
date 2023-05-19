@@ -1,24 +1,23 @@
 import prisma from "@/lib/prisma";
 
 module.exports = async (req, res) => {
-    const email = req.body.email
-    const findUser = await prisma.user.findUnique({
+    const email = req.body.email;
+    console.log(req.body);
+    const user = await prisma.user.findUnique({
         where: {
-            email: email
+            email,
         },
     });
-
-    if (findUser) {
-        res.send({user: findUser})
-    } else {
-        const newUser = await prisma.user.create ({
-            data: {
-                username: req.body.username,
-                first_name: req.body.first_name,
-                email: req.body.email,
-                profile_pic: req.body.profile_pic
-            },
-        });
-        res.send({user: newUser});
+    if (user) {
+        res.send({ user: user });
     }
-}
+    const createdUser = await prisma.user.create({
+        data: {
+            email: req.body.email,
+            username: req.body.username,
+            first_name: req.body.first_name,
+            profile_pic: req.body.profile_pic,
+        },
+    });
+    res.status(200).send(createdUser);
+};

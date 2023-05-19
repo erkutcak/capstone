@@ -6,7 +6,6 @@ export default async function MyProfile () {
 
     return (
         <div className="profile-body">
-            <Navbar/>
             <div className="profile">
                 <Profile/>
             </div>

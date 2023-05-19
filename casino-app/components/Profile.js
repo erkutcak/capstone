@@ -7,7 +7,6 @@ export default function Profile() {
     
     if (error) return <div>{error.message}</div>;
     if (isLoading) return <div>Loading...</div>;
-    console.log(user);
     
     return (
         user && (
