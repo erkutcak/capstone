@@ -1,8 +1,7 @@
 'use client';
 
-import Navbar from "@/components/Navbar";
 import '../styles/dashboard.css';
-import {useUser} from "@auth0/nextjs-auth0/client"
+import { useUser } from "@auth0/nextjs-auth0/client"
 import { useEffect } from "react";
 
 async function findOrCreateUser(user) {
@@ -21,7 +20,6 @@ async function findOrCreateUser(user) {
     });
     return response.json();
 }
-
 
 export default function Dashboard() {
     const { user, error, isLoading } = useUser();

@@ -10,6 +10,7 @@ module.exports = async (req, res) => {
     });
     if (user) {
         res.send({ user: user });
+        return;
     }
     const createdUser = await prisma.user.create({
         data: {
