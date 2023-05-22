@@ -23,6 +23,7 @@ async function findOrCreateUser(user) {
 
 export default function Dashboard() {
     const { user, error, isLoading } = useUser();
+    console.log(user);
 
     useEffect(() => {
     findOrCreateUser(user);

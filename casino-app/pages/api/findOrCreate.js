@@ -7,6 +7,13 @@ module.exports = async (req, res) => {
         where: {
             email,
         },
+        include: {
+            wallet: {
+                include: {
+                    transactions: true,
+                },
+            },
+        },
     });
     if (user) {
         res.send({ user: user });
@@ -18,6 +25,14 @@ module.exports = async (req, res) => {
             username: req.body.username,
             first_name: req.body.first_name,
             profile_pic: req.body.profile_pic,
+            wallet: {
+                create: {
+                    balance: req.body.balance,
+                }
+            }
+        },
+        include: {
+            wallet: true,
         },
     });
     res.status(200).send(createdUser);
