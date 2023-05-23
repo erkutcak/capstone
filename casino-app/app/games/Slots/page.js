@@ -1,11 +1,9 @@
-import MemoryCards from '@/components/MemoryCards'
-import '../../styles/slots.css'
+import SlotMachine from "@/components/SlotMachine"
 
 export default function Slots() {
     return (
         <div>
-            <h1 className="slots-header">GAME</h1>
-            <MemoryCards/>
+            <SlotMachine/>
         </div>
     )
 }
