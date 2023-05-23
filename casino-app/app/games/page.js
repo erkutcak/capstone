@@ -1,28 +1,21 @@
-
+import prisma from "@/lib/prisma";
 import '../styles/games.css';
 
-// async function getGames() {
-//     const games = await prisma.game.findMany()
-//     return games
-// }
+export default async function Games () {
+    const data = await prisma.game.findMany()
 
-export default function Games () {
-    // const data = await getGames()
-
-    // const showGames = data.map((game) => {
-    //     return (
-    //         <li key={game.id}>
-    //             {game.name}
-    //         </li>
-    //     )
-    // })
+    const showGames = data.map((game) => {
+        return (
+            <a href={`games/${game.name}`} key={game.id}>
+                {game.name}
+            </a>
+        )
+    })
 
     return (
         <div className="games-body">
             <div className="games-cards">
-                <ul>
-                    test
-                </ul>
+                {showGames}
             </div>
         </div>
     )

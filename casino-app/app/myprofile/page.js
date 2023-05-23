@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import '../styles/profile.css';
 import Profile from "@/components/Profile";
 

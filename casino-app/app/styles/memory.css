@@ -1,0 +1,99 @@
+.game-container {
+    margin-left: 220px;
+}
+
+.test-title {
+    margin-left: 300px;
+}
+
+.container {
+    margin-left:220px;
+    display: flex;
+    flex-direction: row;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: 75px 75px 75px 75px;
+    column-gap: 60px;
+    row-gap: 15px;
+    justify-items: center;
+    align-items: center;
+    margin-left: 15%;
+    margin-top: 5%;
+}
+.card {
+    text-align: center;
+    height: 140px;
+    width: 120px;
+    font-size: 36px;
+    font-weight: bold;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all 0.2s;
+    user-select: none;
+    cursor: pointer;
+}
+
+.card-img {
+    width: 120px;
+    height: 140px;
+    border-radius: 20px;
+}
+
+.card.gameover {
+    pointer-events: none;
+
+}
+.card-0 {
+    transform: rotateY(0deg);
+}
+.card.active {
+    transform: rotateY(180deg);
+}
+.card.matched .card-front {
+    box-shadow: 0 0 10px rgba(36, 236, 50, 0.5), 0 0 20px rgba(36, 236, 50, 0.8);
+    color: white;
+}
+.card-front,
+.card-back {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    backface-visibility: hidden;
+    height: 100%;
+    border-radius: 20px;
+}
+.card-front {
+    transform: rotateY(180deg);
+    background-color: #eee;
+    line-height: 70px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 50px;
+    z-index: 2;
+}
+.card-back {
+    background-image: url('../../public/cards.jpg');
+    transform: rotateY(0);
+    z-index: 1;
+    background-size: contain;
+}
+.card-back::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 75%;
+    height: 75%;
+    border-radius: 20px;
+}
+.menu {
+    display: flex;
+}
+
+.menu p {
+    font-size: 20px;
+    font-weight: 600;
+}
