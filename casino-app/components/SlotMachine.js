@@ -72,18 +72,21 @@ render() {
 
     return (
         <div className='slots-main'>
-            {winningSound}
-            <h1 className='random-text' style={{ color: 'white'}}>
-            <span className='win-text'>{winner === null ? 'Waiting…' : winner ? '🤑 Pure skill! 🤑' : getLoser()}</span>
-            </h1>
-
-            <div className={`spinner-container`}>
-            <Spinner onFinish={this.finishHandler} ref={(child) => { this._child1 = child; }} timer="1000" />
-            <Spinner onFinish={this.finishHandler} ref={(child) => { this._child2 = child; }} timer="1400" />
-            <Spinner onFinish={this.finishHandler} ref={(child) => { this._child3 = child; }} timer="2200" />
-            <div className="gradient-fade"></div>
+            <div className='slots-text'>
+                {winningSound}
+                <h1 className='random-text' style={{ color: 'white'}}>
+                <span className='win-text'>{winner === null ? 'Waiting…' : winner ? '🤑 Pure skill! 🤑' : getLoser()}</span>
+                </h1>
+                <div className='repeat-button'>
+                    {repeatButton}          
+                </div>
             </div>
-            {repeatButton}          
+            <div className= 'spinner-container'>
+                <Spinner onFinish={this.finishHandler} ref={(child) => { this._child1 = child; }} timer="1000" />
+                <Spinner onFinish={this.finishHandler} ref={(child) => { this._child2 = child; }} timer="1400" />
+                <Spinner onFinish={this.finishHandler} ref={(child) => { this._child3 = child; }} timer="2200" />
+                <div className="gradient-fade"></div>
+            </div>
         </div>
     );
     }

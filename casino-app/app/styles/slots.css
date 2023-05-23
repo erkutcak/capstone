@@ -1,5 +1,7 @@
 .slots-main {
     margin-left: 200px;
+    display: flex;
+    flex-direction: row;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Cairo');
