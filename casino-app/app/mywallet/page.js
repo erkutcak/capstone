@@ -5,7 +5,7 @@ import { useCurrentUser } from '../context/currentUserContext';
 
 export default function MyWallet() {
 
-  const currentUser = useCurrentUser();
+  const { currentUser, setCurrentUser } = useCurrentUser();
 
   return (
   <div className="wallet-body">

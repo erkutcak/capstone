@@ -52,18 +52,23 @@ export function UserContextProvider({children}) {
         }
     }, [user])
 
+    const contextValue = {
+        currentUser,
+        setCurrentUser,
+    };
+
     return (
-        <UserContext.Provider value={currentUser}>
+        <UserContext.Provider value={contextValue}>
             {children}
         </UserContext.Provider>
     )
 }
 
 export function useCurrentUser() {
-    const context = useContext(UserContext)
-    if (context === undefined) {
+    const {currentUser, setCurrentUser} = useContext(UserContext)
+    if (currentUser === undefined) {
         throw new Error("Context must be used within a Provider");
     }
 
-    return context
+    return { currentUser, setCurrentUser }
 }

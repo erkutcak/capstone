@@ -1,30 +1,39 @@
 "use client";
 
+import { useCurrentUser } from '@/app/context/currentUserContext';
 import '../app/styles/slots.css'
-import React, { Component } from 'react';
-import WinningSound from './WinningSound';
 import Spinner from './Spinner';
-import RepeatButton from './RepeatButton';
+import React, { useState, useRef } from 'react';
 
-class SlotMachine extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        winner: null
-        };
-        this.finishHandler = this.finishHandler.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-    }  
 
-    handleClick() { 
-        this.setState({ winner: null });
-        this.emptyArray();
-        this._child1.forceUpdateHandler();
-        this._child2.forceUpdateHandler();
-        this._child3.forceUpdateHandler();
-    }
+function RepeatButton({ onClick }) {
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+    return (
+    <button 
+        aria-label='Play again.' 
+        id='repeatButton' 
+        onClick={onClick}
+        disabled = {isButtonDisabled}
+    />
+    );
+}
 
-    static loser = [
+function WinningSound() {
+    return (
+        <audio autoPlay className="player" preload="false">
+        <source src="https://andyhoffman.codes/random-assets/img/slots/winning_slot.wav" />
+        </audio>  
+    );
+}
+
+function SlotMachine({setIsButtonDisabled}) {
+    const [winner, setWinner] = useState(null);
+    const child1Ref = useRef();
+    const child2Ref = useRef();
+    const child3Ref = useRef();
+    const { currentUser, setCurrentUser } = useCurrentUser();
+
+    const loser = [
         'Not quite', 
         'Stop gambling', 
         'Hey, you lost!', 
@@ -37,59 +46,85 @@ class SlotMachine extends Component {
         'Don\'t hate the coder'
     ];
 
-    static matches = [];
+    const matches = [];
 
-    finishHandler(value) {
-    SlotMachine.matches.push(value);  
-
-    if (SlotMachine.matches.length === 3) {
-        const { winner } = this.state;
-        const first = SlotMachine.matches[0];
-        let results = SlotMachine.matches.every(match => match === first)
-        this.setState({ winner: results });
+    const handleClick = async () => { 
+        if (currentUser.wallet.balance >= 50) {
+            const updatedBalance = currentUser.wallet.balance - 50
+            setWinner(null);
+            emptyArray();
+            child1Ref.current.forceUpdateHandler();
+            child2Ref.current.forceUpdateHandler();
+            child3Ref.current.forceUpdateHandler();
+            setCurrentUser(prevUser => ({
+                ...prevUser,
+                wallet: {
+                    ...prevUser.wallet,
+                    balance: updatedBalance
+                }
+            }))
+            await fetch('/api/updateCoins', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: currentUser.email,
+                    updatedBalance,
+                }),
+            });
+        } else {
+            setIsButtonDisabled(true)
+        }
     }
-}
 
-emptyArray() {
-    SlotMachine.matches = [];
-}
+    const finishHandler = (value) => {
+    matches.push(value);
 
-render() {
-    const { winner } = this.state;
+    if (matches.length === 3) {
+        const first = matches[0];
+        const results = matches.every(match => match === first);
+        setWinner(results);
+        }
+    }
+
+    const emptyArray = () => {
+        matches.length = 0;
+    }
+
     const getLoser = () => {       
-    return SlotMachine.loser[Math.floor(Math.random()*SlotMachine.loser.length)];
+        return loser[Math.floor(Math.random() * loser.length)];
     };
+
     let repeatButton = null;
     let winningSound = null;
 
     if (winner !== null) {
-    repeatButton = <RepeatButton onClick={this.handleClick} />;
+        repeatButton = <RepeatButton onClick={handleClick} />;
     }
-    
+
     if (winner) {
-    winningSound = <WinningSound />;
+        winningSound = <WinningSound />;
     }
 
     return (
         <div className='slots-main'>
-            <div className='slots-text'>
+            <div className='slots-left'>
                 {winningSound}
-                <h1 className='random-text' style={{ color: 'white'}}>
-                <span className='win-text'>{winner === null ? 'Waiting…' : winner ? '🤑 Pure skill! 🤑' : getLoser()}</span>
+                <h1 style={{ color: 'white' }}>
+                    <span>{winner === null ? 'Waiting…' : winner ? '🤑 Pure skill! 🤑' : getLoser()}</span>
                 </h1>
-                <div className='repeat-button'>
-                    {repeatButton}          
-                </div>
+                {repeatButton}
+                {currentUser.wallet.balance}
             </div>
-            <div className= 'spinner-container'>
-                <Spinner onFinish={this.finishHandler} ref={(child) => { this._child1 = child; }} timer="1000" />
-                <Spinner onFinish={this.finishHandler} ref={(child) => { this._child2 = child; }} timer="1400" />
-                <Spinner onFinish={this.finishHandler} ref={(child) => { this._child3 = child; }} timer="2200" />
+            <div className={`spinner-container`}>
+                <Spinner onFinish={finishHandler} ref={child1Ref} timer="1000" />
+                <Spinner onFinish={finishHandler} ref={child2Ref} timer="1400" />
+                <Spinner onFinish={finishHandler} ref={child3Ref} timer="2200" />
                 <div className="gradient-fade"></div>
             </div>
         </div>
     );
-    }
 }
 
 export default SlotMachine;

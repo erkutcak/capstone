@@ -5,7 +5,7 @@ import React from 'react';
 import logo from '../public/logo3.png'
 import '../app/styles/navbar.css'
 
-export default async function Navbar () {
+export default function Navbar () {
 
     return (
         <div className="navbar">

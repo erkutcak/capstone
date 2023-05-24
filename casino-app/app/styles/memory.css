@@ -52,7 +52,7 @@
     transform: rotateY(180deg);
 }
 .card.matched .card-front {
-    box-shadow: 0 0 10px rgba(36, 236, 50, 0.5), 0 0 20px rgba(36, 236, 50, 0.8);
+    box-shadow: 0 0 10px rgba(10, 236, 25, 1.9), 0 0 20px rgba(9, 235, 24, 1.8);
     color: white;
 }
 .card-front,
