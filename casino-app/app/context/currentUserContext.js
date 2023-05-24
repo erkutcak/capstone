@@ -34,23 +34,23 @@ export function UserContextProvider({children}) {
         const userData = await response.json()
         console.log(userData);
         setCurrentUser({
-            email: userData.user.email,
-            username: userData.user.username,
-            first_name: userData.user.first_name,
-            profile_pic: userData.user.profile_pic,
+            email: userData.email,
+            username: userData.username,
+            first_name: userData.first_name,
+            profile_pic: userData.profile_pic,
             wallet: {
-                balance: userData.user.wallet.balance,
+                balance: userData.wallet.balance,
             },
-            transactions: userData.user.wallet.transactions,
+            transactions: userData.wallet.transactions,
         })
         return userData
     }
 
     useEffect(() => {
-        if (user) {
-            const response = getUser(user)
+        if (user && !currentUser.email) {
+            const resp = getUser(user);
         }
-    }, [user])
+    }, [user]);
 
     const contextValue = {
         currentUser,

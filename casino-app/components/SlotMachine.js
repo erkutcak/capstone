@@ -74,6 +74,7 @@ function SlotMachine({setIsButtonDisabled}) {
                 }),
             });
         } else {
+            alert("Insufficient funds!")
             setIsButtonDisabled(true)
         }
     }

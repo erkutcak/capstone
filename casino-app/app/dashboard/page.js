@@ -4,30 +4,9 @@ import '../styles/dashboard.css';
 import { useUser } from "@auth0/nextjs-auth0/client"
 import { useEffect } from "react";
 
-async function findOrCreateUser(user) {
-    if (!user) return null;
-    const response = await fetch("/api/findOrCreate", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json; charset=UTF-8",
-    },
-    body: JSON.stringify({
-        email: user.email,
-        username: user.nickname,
-        first_name: user.name,
-        profile_pic: user.picture,
-        }),
-    });
-    return response.json();
-}
-
 export default function Dashboard() {
     const { user, error, isLoading } = useUser();
     console.log(user);
-
-    useEffect(() => {
-    findOrCreateUser(user);
-    }, [user]);
 
     return (
         <div>

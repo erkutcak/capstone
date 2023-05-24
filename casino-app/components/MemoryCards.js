@@ -2,6 +2,7 @@
 
 import '../app/styles/memory.css'
 import { useState, useEffect } from "react";
+import { useCurrentUser } from '@/app/context/currentUserContext';
 import pic1 from '../public/1.jpeg';
 import pic2 from '../public/2.png';
 import pic3 from '../public/3.png';
@@ -31,20 +32,71 @@ export default function MemoryCards() {
     const [moves, setMoves] = useState(0);
     const [gameOver, setGameOver] = useState(false);
     const [gameWon, setGameWon] = useState(false);
+    const [showPlayButton, setShowPlayButton] = useState(true);
+    const { currentUser, setCurrentUser } = useCurrentUser();
 
     useEffect(() => {
-        initialize();
+        if (!showPlayButton) {
+            initialize();
+        }
     }, []);
 
     useEffect(() => {
         if (matchedCards.length == 16){
         setGameWon(true);
-        } else if (moves === 28) {
+        winCoins()
+        } else if (moves === 30) {
         setGameOver(true);
+        loseCoins()
         }
     }, [moves]);
 
+    const winCoins = async () => {
+        const updatedBalance = currentUser.wallet.balance + 100
+            setCurrentUser(prevUser => ({
+                ...prevUser,
+                wallet: {
+                    ...prevUser.wallet,
+                    balance: updatedBalance
+                }
+            }))
+            await fetch('/api/updateCoins', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: currentUser.email,
+                    updatedBalance,
+                }),
+            });
+    }
+
+    const loseCoins = async () => {
+        if (currentUser.wallet.balance >= 50) {
+            const updatedBalance = currentUser.wallet.balance - 50
+            setCurrentUser(prevUser => ({
+                ...prevUser,
+                wallet: {
+                    ...prevUser.wallet,
+                    balance: updatedBalance
+                }
+            }))
+            await fetch('/api/updateCoins', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: currentUser.email,
+                    updatedBalance,
+                }),
+            });
+        }
+    }
+
     const initialize = () => {
+        loseCoins();
         shuffle();
         setGameOver(false);
         setFlippedCards([]);
@@ -60,7 +112,7 @@ export default function MemoryCards() {
     };
 
     const updateActiveCards = (i) => {
-        if (!flippedCards.includes(i)) {
+    if (!flippedCards.includes(i)) {
         if (flippedCards.length == 1) {
             const firstIdx = flippedCards[0];
             const secondIdx = i;
@@ -79,6 +131,12 @@ export default function MemoryCards() {
         }
     };
 
+    const handlePlayButtonClick = () => {
+        initialize();
+        setShowPlayButton(false);
+    };
+
+
     return (
     <div className="container">
     <div className='left-container'>
@@ -89,9 +147,16 @@ export default function MemoryCards() {
                 {gameOver === true ? <h3>GAME OVER!</h3> : null}
                 {gameWon === true ? <h3>CONGRATULATIONS!</h3> : null}
         </div>
-        <button onClick={() => initialize()} className="reset-btn">
-        Reset
-        </button>
+        {showPlayButton ? (
+            <button onClick={handlePlayButtonClick} className="play-btn">
+            Play
+            </button>
+        ) : (
+            <button onClick={initialize} className="reset-btn">
+            Reset
+            </button>
+        )}
+        {currentUser.wallet.balance}
     </div>
         <div className="board">
             {boardData.map((data, i) => {

@@ -1,9 +1,6 @@
 import prisma from "@/lib/prisma";
 
 module.exports = async (req, res) => {
-    if (req.method !== 'POST') {
-        return res.status(405).json({ message: 'Method Not Allowed' });
-    }
 
     const {updatedBalance} = req.body;
     console.log(req.body);
@@ -21,7 +18,7 @@ module.exports = async (req, res) => {
             },
         },
         include: {
-            wallet: true, // Include the wallet data in the updatedUser response
+            wallet: true,
         },
         });
 
