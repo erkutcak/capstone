@@ -79,13 +79,33 @@ function SlotMachine({setIsButtonDisabled}) {
         }
     }
 
-    const finishHandler = (value) => {
+    const finishHandler = async (value) => {
     matches.push(value);
 
     if (matches.length === 3) {
         const first = matches[0];
         const results = matches.every(match => match === first);
         setWinner(results);
+        if (results === true) {
+            const updatedBalance = currentUser.wallet.balance + 100
+            setCurrentUser(prevUser => ({
+                ...prevUser,
+                wallet: {
+                    ...prevUser.wallet,
+                    balance: updatedBalance
+                }
+            }))
+            await fetch('/api/updateCoins', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: currentUser.email,
+                    updatedBalance,
+                }),
+            });
+        }
         }
     }
 
