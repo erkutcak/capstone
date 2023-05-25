@@ -15,14 +15,14 @@ import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 
 const board = [
-<Image className='card-img' src={pic1}/>, 
-<Image className='card-img' src={pic2}/>, 
-<Image className='card-img' src={pic3}/>, 
-<Image className='card-img' src={pic4}/>, 
-<Image className='card-img' src={pic5}/>, 
-<Image className='card-img' src={pic6}/>, 
-<Image className='card-img' src={pic7}/>, 
-<Image className='card-img' src={pic8}/>
+<Image className='card-img' src={pic1} alt='img1'/>, 
+<Image className='card-img' src={pic2} alt='img2'/>, 
+<Image className='card-img' src={pic3} alt='img3'/>, 
+<Image className='card-img' src={pic4} alt='img4'/>, 
+<Image className='card-img' src={pic5} alt='img5'/>, 
+<Image className='card-img' src={pic6} alt='img6'/>, 
+<Image className='card-img' src={pic7} alt='img7'/>, 
+<Image className='card-img' src={pic8} alt='img8'/>
 ];
 
 export default function MemoryCards() {
@@ -48,7 +48,8 @@ export default function MemoryCards() {
         if (matchedCards.length == 16){
         setGameWon(true);
         winCoins()
-        addTransaction()
+        // addTransaction()
+        transactionWin()
         } else if (moves === 30) {
         setGameOver(true);
         }
@@ -98,14 +99,16 @@ export default function MemoryCards() {
         }
     }
 
-    const addTransaction = async () => {
+    const transactionWin = async () => {
+        const updatedBalance = currentUser.wallet.balance + 100
+        const difference = updatedBalance - currentUser.wallet.balance
         await fetch('/api/addTransaction', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                amount: currentUser.wallet.balance,
+                difference,
                 walletId: currentUser.wallet.id,
                 wallet: currentUser.wallet,
                 gameId: gameId,
@@ -113,9 +116,43 @@ export default function MemoryCards() {
         });
     }
 
+    const transactionLose = async () => {
+        const updatedBalance = currentUser.wallet.balance - 50
+        const difference = updatedBalance - currentUser.wallet.balance
+        await fetch('/api/addTransaction', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                difference,
+                walletId: currentUser.wallet.id,
+                wallet: currentUser.wallet,
+                gameId: gameId,
+            }),
+        });
+    }
+
+
+    // const addTransaction = async () => {
+    //     await fetch('/api/addTransaction', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({
+    //             amount: currentUser.wallet.balance,
+    //             walletId: currentUser.wallet.id,
+    //             wallet: currentUser.wallet,
+    //             gameId: gameId,
+    //         }),
+    //     });
+    // }
+
     const initialize = () => {
         loseCoins();
-        addTransaction();
+        transactionLose();
+        // addTransaction();
         shuffle();
         setGameOver(false);
         setFlippedCards([]);

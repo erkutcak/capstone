@@ -4,6 +4,7 @@ import { useCurrentUser } from '@/app/context/currentUserContext';
 import '../app/styles/slots.css'
 import Spinner from './Spinner';
 import React, { useState, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 
 function RepeatButton({ onClick }) {
@@ -32,6 +33,8 @@ function SlotMachine({setIsButtonDisabled}) {
     const child2Ref = useRef();
     const child3Ref = useRef();
     const { currentUser, setCurrentUser } = useCurrentUser();
+    const searchParams = useSearchParams()
+    const gameId = searchParams.get('id');
 
     const loser = [
         'Not quite', 
@@ -73,10 +76,45 @@ function SlotMachine({setIsButtonDisabled}) {
                     updatedBalance,
                 }),
             });
+            transactionLose()
         } else {
             alert("Insufficient funds!")
             setIsButtonDisabled(true)
         }
+    }
+
+    const transactionWin = async () => {
+        const updatedBalance = currentUser.wallet.balance + 100
+        const difference = updatedBalance - currentUser.wallet.balance
+        await fetch('/api/addTransaction', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                difference,
+                walletId: currentUser.wallet.id,
+                wallet: currentUser.wallet,
+                gameId: gameId,
+            }),
+        });
+    }
+
+    const transactionLose = async () => {
+        const updatedBalance = currentUser.wallet.balance - 50
+        const difference = updatedBalance - currentUser.wallet.balance
+        await fetch('/api/addTransaction', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                difference,
+                walletId: currentUser.wallet.id,
+                wallet: currentUser.wallet,
+                gameId: gameId,
+            }),
+        });
     }
 
     const finishHandler = async (value) => {
@@ -105,6 +143,7 @@ function SlotMachine({setIsButtonDisabled}) {
                     updatedBalance,
                 }),
             });
+            transactionWin()
         }
         }
     }

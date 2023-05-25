@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 module.exports = async (req, res) => {
 
     console.log(req.body);
-    const amount = req.body.amount
+    const amount = req.body.difference
     const walletId = req.body.walletId
     const gameId = req.body.gameId
 
