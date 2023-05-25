@@ -14,6 +14,7 @@ export function UserContextProvider({children}) {
         profile_pic: '',
         wallet: {
             balance: 0,
+            id: '',
         },
         transactions: [],
     })
@@ -40,6 +41,7 @@ export function UserContextProvider({children}) {
             profile_pic: userData.profile_pic,
             wallet: {
                 balance: userData.wallet.balance,
+                id: userData.wallet.id,
             },
             transactions: userData.wallet.transactions,
         })

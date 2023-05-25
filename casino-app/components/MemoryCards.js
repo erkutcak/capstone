@@ -12,6 +12,7 @@ import pic6 from '../public/6.jpeg';
 import pic7 from '../public/7.jpeg';
 import pic8 from '../public/8.jpeg';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 
 const board = [
 <Image className='card-img' src={pic1}/>, 
@@ -34,6 +35,8 @@ export default function MemoryCards() {
     const [gameWon, setGameWon] = useState(false);
     const [showPlayButton, setShowPlayButton] = useState(true);
     const { currentUser, setCurrentUser } = useCurrentUser();
+    const searchParams = useSearchParams()
+    const gameId = searchParams.get('id');
 
     useEffect(() => {
         if (!showPlayButton) {
@@ -45,9 +48,9 @@ export default function MemoryCards() {
         if (matchedCards.length == 16){
         setGameWon(true);
         winCoins()
+        addTransaction()
         } else if (moves === 30) {
         setGameOver(true);
-        loseCoins()
         }
     }, [moves]);
 
@@ -95,8 +98,24 @@ export default function MemoryCards() {
         }
     }
 
+    const addTransaction = async () => {
+        await fetch('/api/addTransaction', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                amount: currentUser.wallet.balance,
+                walletId: currentUser.wallet.id,
+                wallet: currentUser.wallet,
+                gameId: gameId,
+            }),
+        });
+    }
+
     const initialize = () => {
         loseCoins();
+        addTransaction();
         shuffle();
         setGameOver(false);
         setFlippedCards([]);
