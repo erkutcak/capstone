@@ -2,6 +2,7 @@
 import React from "react";
 import { useCurrentUser } from "@/app/context/currentUserContext";
 import DeleteProfile from "./DeleteProfile";
+import EditProfile from "./EditProfile";
 
 export default function Profile() {
     const { currentUser, setCurrentUser } = useCurrentUser();
@@ -14,7 +15,7 @@ export default function Profile() {
             <h3>Username: {currentUser.username}</h3>
             <p>E-mail: {currentUser.email}</p>
             <p>Current Balance: {currentUser.wallet.balance}</p>
-            <button className="edit-button">Edit Profile</button>
+            <EditProfile/>
             <DeleteProfile/>
         </div>
         )
