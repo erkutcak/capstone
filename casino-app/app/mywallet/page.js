@@ -9,9 +9,6 @@ import { useCurrentUser } from "@/app/context/currentUserContext";
 export default function MyWallet() {
 
   const { currentUser, setCurrentUser } = useCurrentUser();
-  console.log(currentUser);
-  
-  console.log(currentUser.transactions);
     
   const displayTransactions = currentUser.transactions.map((transaction) => {
       return <TransactionCard key={transaction.id} transaction={transaction} />
