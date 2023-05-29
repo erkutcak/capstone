@@ -21,22 +21,23 @@ export default function Profile() {
         }}
         >
             <div className="profile-container">
-                <div className="profile-img-container">
-                    <img className="profile-img" src={currentUser.profile_pic} alt={currentUser.first_name} />
-                    <hr className="vl" />
-                </div>
-                <div className="profile-card">
-                    <div className="profile-left">
-                        <h2 className="profile-title" >Name:</h2>
-                        <h2 className="profile-name" >{currentUser.first_name}</h2>
-                        <h3 className="profile-title" >Username:</h3>
-                        <h3 className="profile-username" >{currentUser.username}</h3>
+                <div className="info-container">
+                    <div className="profile-img-container">
+                        <img className="profile-img" src={currentUser.profile_pic} alt={currentUser.first_name} />
                     </div>
-                    <div className="profile-right">
-                        <p className="profile-title" >E-mail:</p>
-                        <p className="profile-email" >{currentUser.email}</p>
-                        <p className="profile-title" >Current Balance:</p>
-                        <p className="profile-balance" >{currentUser.wallet.balance}</p>
+                    <div className="profile-card">
+                        <div className="profile-left">
+                            <h2 className="profile-title" >Name:</h2>
+                            <h2 className="profile-info" >{currentUser.first_name}</h2>
+                            <h3 className="profile-title" >Username:</h3>
+                            <h3 className="profile-info" >{currentUser.username}</h3>
+                        </div>
+                        <div className="profile-right">
+                            <p className="profile-title" >E-mail:</p>
+                            <p className="profile-email" >{currentUser.email}</p>
+                            <p className="profile-title" >Current Balance:</p>
+                            <p className="profile-info" >💰 {currentUser.wallet.balance}</p>
+                        </div>
                     </div>
                 </div>
                 <div className="button-container">

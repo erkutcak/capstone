@@ -15,9 +15,8 @@
 
 .profile-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
     background-color: #daa520;
     width: 600px;
     height: 200px;
@@ -26,16 +25,24 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.info-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 580px;
+    justify-content: flex-start;
+}
+
 .profile-img-container {
     margin-right: 20px;
     margin-left: 10px;
-    display: flex;
-    flex-direction: row;
+    padding-top: 20px;
 }
 
 .profile-img {
     border-radius: 50%;
     width: 140px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .profile-card {
@@ -44,12 +51,53 @@
     gap: 5px;
 }
 
+.profile-left {
+    margin-right: 15px;
+}
+
+.profile-right {
+    margin-left: 20px;
+}
+
 .profile-title {
     margin-bottom: 5px;
     margin-top: 5px;
+    font-size: 10px;
+    background-color: #141a36;
+    border-radius: 20px;
+    padding-left: 5px;
+    color: #daa520;
+    font-family: 'Bungee', sans-serif;
+}
+
+.profile-info {
+    color: #141a36;
+    font-family: 'Bungee', sans-serif;
+    height: 40px;
+}
+
+.profile-email {
+    font-size: 14px;
+    height: 40px;
+    color: #141a36;
+    font-family: 'Bungee', sans-serif;
 }
 
 .button-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    margin-top: -5px;
+}
+
+.profile-page-title {
+    font-family: 'Bungee', sans-serif;
+    font-size: 40px;
+    margin-top: -30px;
+    border-radius: 20px;
+    background-color: #daa520;
+    color: #141a36;
+    width: 600px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 10px;
 }

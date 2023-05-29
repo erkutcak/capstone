@@ -1,16 +1,18 @@
 "use client";
 import React from "react";
-import { useCurrentUser } from "@/app/context/currentUserContext";
+import { DateTime } from "luxon";
+import '../app/styles/wallet.css'
 
 export default function TransactionCard({transaction}) {
     
     const { amount, createdAt, gameId} = transaction;
+    const formattedDate = DateTime.fromISO(createdAt).toFormat('MM/dd/yyyy - HH:mm');
 
     return (
-        <div className="transaction-card">
-            <h3>{amount}</h3>
-            <h3>{gameId}</h3>
-            <h3>{createdAt}</h3>
-        </div>
+        <tr className="transaction-card">
+            <td className="table-info">💰{amount}</td>
+            <td className="table-info">{gameId}</td>
+            <td className="table-info">{formattedDate}</td>
+        </tr>
         )
     }
