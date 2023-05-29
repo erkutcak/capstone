@@ -57,6 +57,8 @@ model Wallet {
 model Game {
   id            Int   @id @default(autoincrement())
   name          String
+  image         String?
+  bio           String?   
 
   transactions  Transaction[]
   @@map(name: "games")
