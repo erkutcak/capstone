@@ -13,6 +13,7 @@ import pic7 from '../public/7.jpeg';
 import pic8 from '../public/8.jpeg';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 const board = [
 <Image className='card-img' src={pic1} alt='img1'/>, 
@@ -50,7 +51,7 @@ export default function MemoryCards() {
         winCoins()
         // addTransaction()
         transactionWin()
-        } else if (moves === 30) {
+        } else if (moves === 28) {
         setGameOver(true);
         }
     }, [moves]);
@@ -133,22 +134,6 @@ export default function MemoryCards() {
         });
     }
 
-
-    // const addTransaction = async () => {
-    //     await fetch('/api/addTransaction', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //             amount: currentUser.wallet.balance,
-    //             walletId: currentUser.wallet.id,
-    //             wallet: currentUser.wallet,
-    //             gameId: gameId,
-    //         }),
-    //     });
-    // }
-
     const initialize = () => {
         loseCoins();
         transactionLose();
@@ -195,45 +180,89 @@ export default function MemoryCards() {
 
     return (
     <div className="container">
-    <div className='left-container'>
-        <div className="menu">
-            <p>{`Moves - ${moves}`} / 28</p>
-        </div>
-        <div className="menu">
-                {gameOver === true ? <h3>GAME OVER!</h3> : null}
-                {gameWon === true ? <h3>CONGRATULATIONS!</h3> : null}
-        </div>
-        {showPlayButton ? (
-            <button onClick={handlePlayButtonClick} className="play-btn">
-            Play
-            </button>
-        ) : (
-            <button onClick={initialize} className="reset-btn">
-            Reset
-            </button>
-        )}
-        {currentUser.wallet.balance}
-    </div>
-        <div className="board">
-            {boardData.map((data, i) => {
-            const flipped = flippedCards.includes(i) ? true : false;
-            const matched = matchedCards.includes(i) ? true : false;
-            return (
-                <div
-                onClick={() => {
-                    updateActiveCards(i);
+        <motion.div
+                className="box"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                    duration: 0.5,
+                    delay: 0.1,
+                    ease: [0, 0.71, 0.2, 1.01]
                 }}
-                key={i}
-                className={`card ${flipped || matched ? "active" : ""} ${
-                    matched ? "matched" : ""
-                } ${gameOver ? "gameover" : ""}`}
-                >
-                <div className="card-front">{data}</div>
-                <div className="card-back"></div>
-                </div>
-            );
-            })}
+        >
+        <div className='left-container'>
+            <h1 className='ingame-title'>HALLOWEEN MEMORY</h1>
+            <p className='game-intro-bio'>Welcome to a spine-chilling Halloween-themed memory card game! Get ready to test your memory skills while immersing yourself in the spirit of this haunting holiday. <br /><br />
+            Prepare to navigate through a grid of face-down cards, each hiding a unique Halloween illustration. You have 28 moves to win the game! With each turn, you'll flip over two cards, hoping to find a matching pair. Remember where each card is located, as you'll need to rely on your memory to make successful matches. Each play is 50 coins.
+            </p>
+            <h2 className='ingame-balance'>Current Balance: <br /> 💰{currentUser.wallet.balance}</h2>
+            <h3 className='ingame-balance'>Pot 💰1000</h3>
+            <div className="menu">
+            </div>
+                <p className='moves-left'>Moves Left: <br/>{moves} / 28</p>
+            <div className="menu">
+                    {gameOver === true ? <h3 className='game-over'>GAME OVER!</h3> : null}
+                    {gameWon === true ? <h3 className='congrats'>CONGRATULATIONS!</h3> : null}
+            </div>
+            {showPlayButton ? (
+                <button onClick={handlePlayButtonClick} className="play-btn">
+                    P L A Y
+                    <div id="clip">
+                        <div id="leftTop" class="corner"></div>
+                        <div id="rightBottom" class="corner"></div>
+                        <div id="rightTop" class="corner"></div>
+                        <div id="leftBottom" class="corner"></div>
+                    </div>
+                    <span id="rightArrow" class="arrow"></span>
+                    <span id="leftArrow" class="arrow"></span>
+                </button>
+            ) : (
+                <button onClick={initialize} className="play-btn">
+                    R E S E T
+                    <div id="clip">
+                        <div id="leftTop" class="corner"></div>
+                        <div id="rightBottom" class="corner"></div>
+                        <div id="rightTop" class="corner"></div>
+                        <div id="leftBottom" class="corner"></div>
+                    </div>
+                    <span id="rightArrow" class="arrow"></span>
+                    <span id="leftArrow" class="arrow"></span>
+                </button>
+            )}
+            
         </div>
+        </motion.div>
+            <div className="board">
+                {boardData.map((data, i) => {
+                    const flipped = flippedCards.includes(i) ? true : false;
+                const matched = matchedCards.includes(i) ? true : false;
+                return (
+                    <motion.div
+                        className="box"
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{
+                            duration: 0.5,
+                            delay: 0.1,
+                            ease: [0, 0.71, 0.2, 1.01]
+                        }}
+                    >
+                    <div
+                    onClick={() => {
+                        updateActiveCards(i);
+                    }}
+                    key={i}
+                    className={`card ${flipped || matched ? "active" : ""} ${
+                        matched ? "matched" : ""
+                    } ${gameOver ? "gameover" : ""}`}
+                    >
+                    <div className="card-front">{data}</div>
+                    <div className="card-back"></div>
+                    </div>
+                </motion.div>
+                );
+                })}
+            </div>
     </div>
     );
 }
