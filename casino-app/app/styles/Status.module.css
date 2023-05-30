@@ -1,6 +1,7 @@
 .statusContainer {
     display: flex;
     justify-content: center;
+    font-family: 'Aoboshi One';
   }
   
   .status {

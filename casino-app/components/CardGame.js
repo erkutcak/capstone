@@ -8,6 +8,7 @@ import Hand from "./Hand"
 import jsonData from "../deck.json"
 import { useCurrentUser } from '@/app/context/currentUserContext';
 import { useSearchParams } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 const CardGame = () => {
     let GameState
@@ -30,7 +31,7 @@ const CardGame = () => {
     let Message
 
     ;(function(Message) {
-        Message["bet"] = "Place a Bet!"
+        Message["bet"] = "BLACKJACK"
         Message["hitStand"] = "Hit or Stand?"
         Message["bust"] = "Bust!"
         Message["userWin"] = "You Win!"
@@ -356,18 +357,64 @@ const CardGame = () => {
 
     return (
         <div className='cardgame-main'>
-        <Status message={message}/>
-        <Controls
-            balance={currentUser.wallet.balance}
-            gameState={gameState}
-            buttonState={buttonState}
-            betEvent={placeBet}
-            hitEvent={hit}
-            standEvent={stand}
-            resetEvent={resetGame}
-        />
-        <Hand title={`Dealer's Hand (${dealerScore})`} cards={dealerCards} />
-        <Hand title={`Your Hand (${userScore})`} cards={userCards} />
+        <motion.div
+            className="box"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+                duration: 0.5,
+                delay: 0.1,
+                ease: [0, 0.71, 0.2, 1.01]
+            }}
+        >
+            <Status message={message}/>
+            <Controls
+                balance={currentUser.wallet.balance}
+                gameState={gameState}
+                buttonState={buttonState}
+                betEvent={placeBet}
+                hitEvent={hit}
+                standEvent={stand}
+                resetEvent={resetGame}
+            />
+        </motion.div>
+        <motion.div
+            className="box"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+                duration: 1.9,
+                delay: 1.5,
+                ease: [0, 0.71, 0.2, 1.01]
+            }}
+        >
+        <div className='table-container'>
+            <motion.div
+                className="box"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                    duration: 1.9,
+                    delay: 1.5,
+                    ease: [0, 0.71, 0.2, 1.01]
+                }}
+            >
+                <Hand title={`Dealer's Hand (${dealerScore})`} cards={dealerCards} />
+            </motion.div>
+            <motion.div
+                className="box"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                    duration: 1.9,
+                    delay: 1.5,
+                    ease: [0, 0.71, 0.2, 1.01]
+                }}
+            >
+                <Hand title={`Your Hand (${userScore})`} cards={userCards} />
+            </motion.div>
+        </div>
+        </motion.div>
         </div>
     )
 }

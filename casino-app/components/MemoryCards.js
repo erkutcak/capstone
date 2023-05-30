@@ -192,7 +192,7 @@ export default function MemoryCards() {
         >
         <div className='left-container'>
             <h1 className='ingame-title'>HALLOWEEN MEMORY</h1>
-            <p className='game-intro-bio'>Welcome to a spine-chilling Halloween-themed memory card game! Get ready to test your memory skills while immersing yourself in the spirit of this haunting holiday. <br /><br />
+            <p className='game-intro-bio'>Welcome to a spine-chilling Halloween-themed memory card game! Get ready to test your memory skills while immersing yourself in the spirit of Halloween. <br /><br />
             Prepare to navigate through a grid of face-down cards, each hiding a unique Halloween illustration. You have 28 moves to win the game! With each turn, you'll flip over two cards, hoping to find a matching pair. Remember where each card is located, as you'll need to rely on your memory to make successful matches. Each play is 50 coins.
             </p>
             <h2 className='ingame-balance'>Current Balance: <br /> 💰{currentUser.wallet.balance}</h2>

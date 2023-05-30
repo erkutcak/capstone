@@ -1,3 +1,14 @@
 .cardgame-main {
     margin-left: 220px;
 }
+
+.table-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: darkgreen;
+    border-radius: 20px;
+    width: 600px;
+    margin-left: 280px;
+}

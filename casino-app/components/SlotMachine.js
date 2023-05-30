@@ -10,12 +10,12 @@ import { useSearchParams } from 'next/navigation';
 function RepeatButton({ onClick }) {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     return (
-    <button 
+    <button
         aria-label='Play again.' 
         id='repeatButton' 
         onClick={onClick}
         disabled = {isButtonDisabled}
-    />
+    >SPIN!</button>
     );
 }
 
@@ -37,16 +37,16 @@ function SlotMachine({setIsButtonDisabled}) {
     const gameId = searchParams.get('id');
 
     const loser = [
-        'Not quite', 
-        'Stop gambling', 
-        'Hey, you lost!', 
-        'Ouch! I felt that',      
-        'Don\'t beat yourself up',
-        'There goes the college fund',
-        'I have a cat. You have a loss',
-        'You\'re awesome at losing',
-        'Coding is hard',
-        'Don\'t hate the coder'
+        '😬 Not quite 😬', 
+        '🛑 Stop gambling 🛑', 
+        '😔 Hey, you lost! 😔', 
+        '🤕 Ouch! I felt that 🤕',      
+        '👊🏼 Don\'t beat yourself up 👊🏼',
+        '💸 There goes the college fund 💸',
+        '😿 I have a cat. You have a loss 😿',
+        '👍🏼 You\'re awesome at losing 👍🏼',
+        '👷🏼 Coding is hard 👷🏼',
+        '🤬 Don\'t hate the coder 🤬'
     ];
 
     const matches = [];
@@ -170,18 +170,23 @@ function SlotMachine({setIsButtonDisabled}) {
     return (
         <div className='slots-main'>
             <div className='slots-left'>
+                <h1 className='slots-title'>TASTY SLOT MACHINE</h1>
+                <p className='slots-bio'>Welcome to our delectable slot machine game filled with mouthwatering treats and delightful surprises! Get ready to indulge in a gaming experience that combines the excitement of spinning reels with an irresistible menu of tasty symbols.  <br /> <br />Prepare yourself for a culinary adventure as you encounter delicious slices of pizza, juicy cherries, savory burgers, creamy avocados, refreshing beers, ripe bananas, tropical pineapples, and golden corn. Each play is 50 coins.</p>
+                <h2 className='slot-balance'>Current Balance: <br /> 💰{currentUser.wallet.balance}</h2>
+                <h3 className='slot-balance'>Pot 💰2000</h3>
                 {winningSound}
-                <h1 style={{ color: 'white' }}>
+                {repeatButton}
+            </div>
+            <div className='slots-right'>
+                <h1 className='slots-text' style={{ color: 'white' }}>
                     <span>{winner === null ? 'Waiting…' : winner ? '🤑 Pure skill! 🤑' : getLoser()}</span>
                 </h1>
-                {repeatButton}
-                {currentUser.wallet.balance}
-            </div>
-            <div className={`spinner-container`}>
-                <Spinner onFinish={finishHandler} ref={child1Ref} timer="1000" />
-                <Spinner onFinish={finishHandler} ref={child2Ref} timer="1400" />
-                <Spinner onFinish={finishHandler} ref={child3Ref} timer="2200" />
-                <div className="gradient-fade"></div>
+                <div className='spinner-container'>
+                    <Spinner onFinish={finishHandler} ref={child1Ref} timer="1000" />
+                    <Spinner onFinish={finishHandler} ref={child2Ref} timer="1400" />
+                    <Spinner onFinish={finishHandler} ref={child3Ref} timer="2200" />
+                    <div className="gradient-fade"></div>
+                </div>
             </div>
         </div>
     );
