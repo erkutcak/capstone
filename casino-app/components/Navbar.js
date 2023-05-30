@@ -24,6 +24,9 @@ export default function Navbar () {
             <Link href={'/mywallet'}>
                 <button className="nav-button">Wallet</button>
             </Link>
+            <Link href={'/about'}>
+                <button className="nav-button">About</button>
+            </Link>
             <a href="/api/auth/logout">
                 <button className="nav-button">Logout</button>
             </a>

@@ -5,6 +5,7 @@ import { useUser } from "@auth0/nextjs-auth0/client"
 import { useEffect } from "react";
 import DailyPrize from '@/components/DailyPrize';
 import { motion } from 'framer-motion';
+import { ToastContainer } from "react-toastify";
 
 export default function Dashboard() {
     const { user, error, isLoading } = useUser();
@@ -23,7 +24,7 @@ export default function Dashboard() {
                         delay: 1.5,
                         ease: [0, 0.71, 0.2, 1.01]
                     }}
-                >
+                    >
                     <div className="leaderboard">
                         <h3>Leaderboard</h3>
                     </div>
@@ -37,7 +38,7 @@ export default function Dashboard() {
                         delay: 1.5,
                         ease: [0, 0.71, 0.2, 1.01]
                     }}
-                >
+                    >
                 <div className="recently-played">
                     <DailyPrize/>
                 </div>

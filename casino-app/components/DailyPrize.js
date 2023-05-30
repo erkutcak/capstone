@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useCurrentUser } from '@/app/context/currentUserContext';
+import { ToastContainer, toast } from "react-toastify";
 
 const DailyPrize = ({ prize = 5000, disabled = false }) => {
     const [number, setNumber] = useState("00000");
@@ -19,19 +20,45 @@ const DailyPrize = ({ prize = 5000, disabled = false }) => {
                 setNumber(String(prize).padStart(5, "0"));
                 // ======================
                 // Add additonal code here to update the user's wallet with the prize amount
-
+                const updatedBalance = currentUser.wallet.balance + prize
+                setCurrentUser(prevUser => ({
+                    ...prevUser,
+                    wallet: {
+                        ...prevUser.wallet,
+                        balance: updatedBalance
+                    }
+                }))
+                fetch('/api/updateCoins', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: currentUser.email,
+                        updatedBalance,
+                    }),
+                });
                 // add logic to limit the number of times the prize can be claimed using the disabled prop and date
                 // ======================
                 return;
             }
             setTimeout(updateNumber, updateInterval);
         };
+        toast('Your coins are added to your wallet!', {
+            hideProgressBar: false,
+            autoClose: 4600,
+            type: "success",
+        })
 
         // simple diasabled check but feel free to make this more complex if you want
         !disabled && updateNumber();
     };
 
+    console.log(number);
+    console.log(prize);
+
     return (
+        <div>
         <svg width='544px' height='542.353px' xmlns='http://www.w3.org/2000/svg' xmlnsXlink='http://www.w3.org/1999/xlink'>
             <defs>
                 <filter x='-20.0%' y='-14.3%' width='140.0%' height='140.0%' filterUnits='objectBoundingBox' id='filter-2'>
@@ -126,6 +153,7 @@ const DailyPrize = ({ prize = 5000, disabled = false }) => {
                 </g>
             </g>
         </svg>
+        </div>
     );
 };
 
