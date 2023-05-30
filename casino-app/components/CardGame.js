@@ -91,6 +91,7 @@ const CardGame = () => {
             setButtonState({ ...buttonState })
         } else if (userScore > 21) {
             bust()
+            console.log('test');
             loseCoins()
             transactionLose()
         }

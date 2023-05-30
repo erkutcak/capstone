@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useCurrentUser } from '@/app/context/currentUserContext';
 
-const DailyPrize = ({ prize = null, disabled = false }) => {
+const DailyPrize = ({ prize = 5000, disabled = false }) => {
     const [number, setNumber] = useState("00000");
+    const { currentUser, setCurrentUser } = useCurrentUser();
 
     const scrambleNumber = () => {
         // number scramble config
@@ -17,6 +19,7 @@ const DailyPrize = ({ prize = null, disabled = false }) => {
                 setNumber(String(prize).padStart(5, "0"));
                 // ======================
                 // Add additonal code here to update the user's wallet with the prize amount
+
                 // add logic to limit the number of times the prize can be claimed using the disabled prop and date
                 // ======================
                 return;

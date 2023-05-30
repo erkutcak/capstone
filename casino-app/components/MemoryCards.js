@@ -14,6 +14,8 @@ import pic8 from '../public/8.jpeg';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const board = [
 <Image className='card-img' src={pic1} alt='img1'/>, 
@@ -48,16 +50,25 @@ export default function MemoryCards() {
     useEffect(() => {
         if (matchedCards.length == 16){
         setGameWon(true);
+        toast('Congratulations! You won 💰1000! ', {
+            hideProgressBar: false,
+            autoClose: 4600,
+            type: "success",
+        });
         winCoins()
-        // addTransaction()
         transactionWin()
         } else if (moves === 28) {
-        setGameOver(true);
+            toast('Game Over! Try Again.', {
+                hideProgressBar: false,
+                autoClose: 4600,
+                type: "error",
+            });
+            setGameOver(true);
         }
     }, [moves]);
 
     const winCoins = async () => {
-        const updatedBalance = currentUser.wallet.balance + 100
+        const updatedBalance = currentUser.wallet.balance + 1000
             setCurrentUser(prevUser => ({
                 ...prevUser,
                 wallet: {
@@ -101,7 +112,7 @@ export default function MemoryCards() {
     }
 
     const transactionWin = async () => {
-        const updatedBalance = currentUser.wallet.balance + 100
+        const updatedBalance = currentUser.wallet.balance + 1000
         const difference = updatedBalance - currentUser.wallet.balance
         await fetch('/api/addTransaction', {
             method: 'POST',
@@ -232,6 +243,7 @@ export default function MemoryCards() {
             
         </div>
         </motion.div>
+                <ToastContainer/>
             <div className="board">
                 {boardData.map((data, i) => {
                     const flipped = flippedCards.includes(i) ? true : false;

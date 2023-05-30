@@ -3,6 +3,8 @@
 import '../styles/dashboard.css';
 import { useUser } from "@auth0/nextjs-auth0/client"
 import { useEffect } from "react";
+import DailyPrize from '@/components/DailyPrize';
+import { motion } from 'framer-motion';
 
 export default function Dashboard() {
     const { user, error, isLoading } = useUser();
@@ -12,15 +14,34 @@ export default function Dashboard() {
         <div>
             <h1 className="dash-title">My Dashboard</h1>
             <div className="dash-body">
-            <div className="recently-played">
-                <h3>Recently Played Games</h3>
-            </div>
-            <div className="recent-transactions">
-                <h3>Recent Transactions</h3>
-            </div>
-            <div className="leaderboard">
-                <h3>Leaderboard</h3>
-            </div>
+                <motion.div
+                    className="box"
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{
+                        duration: 1.9,
+                        delay: 1.5,
+                        ease: [0, 0.71, 0.2, 1.01]
+                    }}
+                >
+                    <div className="leaderboard">
+                        <h3>Leaderboard</h3>
+                    </div>
+                </motion.div>
+                <motion.div
+                    className="box"
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{
+                        duration: 1.9,
+                        delay: 1.5,
+                        ease: [0, 0.71, 0.2, 1.01]
+                    }}
+                >
+                <div className="recently-played">
+                    <DailyPrize/>
+                </div>
+                </motion.div>
             </div>
         </div>
         );

@@ -5,7 +5,7 @@ import '../app/styles/slots.css'
 import Spinner from './Spinner';
 import React, { useState, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
-
+import { ToastContainer, toast } from "react-toastify";
 
 function RepeatButton({ onClick }) {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
@@ -78,13 +78,17 @@ function SlotMachine({setIsButtonDisabled}) {
             });
             transactionLose()
         } else {
-            alert("Insufficient funds!")
+            toast('Insufficient Coins! ', {
+                hideProgressBar: false,
+                autoClose: 4600,
+                type: "error",
+            });
             setIsButtonDisabled(true)
         }
     }
 
     const transactionWin = async () => {
-        const updatedBalance = currentUser.wallet.balance + 100
+        const updatedBalance = currentUser.wallet.balance + 2000
         const difference = updatedBalance - currentUser.wallet.balance
         await fetch('/api/addTransaction', {
             method: 'POST',
@@ -125,7 +129,7 @@ function SlotMachine({setIsButtonDisabled}) {
         const results = matches.every(match => match === first);
         setWinner(results);
         if (results === true) {
-            const updatedBalance = currentUser.wallet.balance + 100
+            const updatedBalance = currentUser.wallet.balance + 2000
             setCurrentUser(prevUser => ({
                 ...prevUser,
                 wallet: {
@@ -144,6 +148,11 @@ function SlotMachine({setIsButtonDisabled}) {
                 }),
             });
             transactionWin()
+            toast('CONGRATULATIONS! ', {
+                hideProgressBar: false,
+                autoClose: 4600,
+                type: "success",
+            });
         }
         }
     }
@@ -169,6 +178,7 @@ function SlotMachine({setIsButtonDisabled}) {
 
     return (
         <div className='slots-main'>
+            <ToastContainer/>
             <div className='slots-left'>
                 <h1 className='slots-title'>TASTY SLOT MACHINE</h1>
                 <p className='slots-bio'>Welcome to our delectable slot machine game filled with mouthwatering treats and delightful surprises! Get ready to indulge in a gaming experience that combines the excitement of spinning reels with an irresistible menu of tasty symbols.  <br /> <br />Prepare yourself for a culinary adventure as you encounter delicious slices of pizza, juicy cherries, savory burgers, creamy avocados, refreshing beers, ripe bananas, tropical pineapples, and golden corn. Each play is 50 coins.</p>

@@ -5,7 +5,7 @@
 
 .dash-body {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 1100px;
     height: 100%;
     margin-left: 220px;
@@ -13,39 +13,18 @@
 }
 
 .recently-played {
-    display: flex;
-    flex-direction: row;
-    height: 200px;
     border-radius: 10px;
-    padding: 5px 0 5px 5px;
+    padding: 10px 10px 10px 10px;
     background-color: aliceblue;
     color: navy;
     box-shadow: 0 4px 8px 0 rgba(218, 165, 32, 0.5), 0 6px 20px 0 rgba(218, 165, 32, 0.30);
-    /* background-image: url('../../public/logo3.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center; */
-}
-
-.recent-transactions {
-    display: flex;
-    flex-direction: row;
-    height: 200px;
-    border-radius: 10px;
-    padding: 5px 0 5px 5px;
-    background-color: orange;
-    color: navy;
-    box-shadow: 0 4px 8px 0 rgba(218, 165, 32, 0.5), 0 6px 20px 0 rgba(218, 165, 32, 0.30);
-    /* background-image: url('../../public/logo3.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center; */
 }
 
 .leaderboard {
     display: flex;
     flex-direction: row;
-    height: 200px;
+    height: 562px;
+    width: 400px;
     border-radius: 10px;
     padding: 5px 0 5px 5px;
     background-color: greenyellow;
