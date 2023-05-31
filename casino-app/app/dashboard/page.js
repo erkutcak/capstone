@@ -7,6 +7,22 @@ import { motion } from 'framer-motion';
 
 export default function Dashboard() {
 
+        const prizes = [
+        '50', 
+        '50', 
+        '100',
+        '500',
+        '1000', 
+        '5000',      
+        '10000',
+        '20000',
+        '50000',
+        '30000',
+    ];
+
+    const randomIndex = Math.floor(Math.random() * prizes.length);
+    const prize = prizes[randomIndex];
+
     return (
         <div>
             <h1 className="dash-title">My Dashboard</h1>
@@ -38,7 +54,7 @@ export default function Dashboard() {
                     >
                 <div className="recently-played">
                     <h1 className='daily-win-title'>Hit the red button to win coins!</h1>
-                    <DailyPrize/>
+                    <DailyPrize prize={prize}/>
                 </div>
                 </motion.div>
             </div>

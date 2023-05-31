@@ -3,7 +3,7 @@ import { useCurrentUser } from '@/app/context/currentUserContext';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const DailyPrize = ({ prize = 5000, disabled = false }) => {
+const DailyPrize = ({ prize, disabled = false }) => {
     const [number, setNumber] = useState("00000");
     const { currentUser, setCurrentUser } = useCurrentUser();
 
@@ -19,9 +19,7 @@ const DailyPrize = ({ prize = 5000, disabled = false }) => {
             updates++;
             if (updates >= maxUpdates) {
                 setNumber(String(prize).padStart(5, "0"));
-                // ======================
-                // Add additonal code here to update the user's wallet with the prize amount
-                const updatedBalance = currentUser.wallet.balance + prize
+                const updatedBalance = currentUser.wallet.balance + parseInt(prize)
                 setCurrentUser(prevUser => ({
                     ...prevUser,
                     wallet: {
@@ -39,8 +37,6 @@ const DailyPrize = ({ prize = 5000, disabled = false }) => {
                         updatedBalance,
                     }),
                 });
-                // add logic to limit the number of times the prize can be claimed using the disabled prop and date
-                // ======================
                 return;
             }
             setTimeout(updateNumber, updateInterval);
@@ -51,8 +47,6 @@ const DailyPrize = ({ prize = 5000, disabled = false }) => {
             autoClose: 4600,
             type: "success",
         })
-
-        // simple diasabled check but feel free to make this more complex if you want
         !disabled && updateNumber();
     };
 
