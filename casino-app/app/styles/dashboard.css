@@ -1,6 +1,13 @@
 .dash-title {
     margin: 20px 0 20px 220px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Bungee', sans-serif;
+    background-color: #daa520;
+    height: 40px;
+    width: 1000px;
+    border-radius: 20px;
+    padding: 10px;
+    text-align: center;
+    color: #141a36;
 }
 
 .dash-body {
@@ -16,16 +23,38 @@
     border-radius: 10px;
     padding: 10px 10px 10px 10px;
     background-color: #232f62b9;
-    color: navy;
+    color: white;
 }
 
 .leaderboard {
     display: flex;
-    flex-direction: row;
-    height: 562px;
+    flex-direction: column;
+    height: 632px;
     width: 400px;
     border-radius: 10px;
-    padding: 5px 0 5px 5px;
-    background-color: greenyellow;
-    color: navy;
+    padding: 10px;
+    background-color: #232f62b9;
+    color: white;
+}
+
+.daily-win-title {
+    font-family: 'Bungee', sans-serif;
+    background-color: #daa520;
+    height: 40px;
+    width: 100%;
+    border-radius: 20px;
+    padding: 10px;
+    text-align: center;
+    color: #141a36;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.navbar-balance {
+    background-color: azure;
+    border-radius: 20px;
+    padding: 2px 5px;
+    font-family: 'Bungee', sans-serif;
+    color: #141a36;
+    margin-top: 50px;
 }

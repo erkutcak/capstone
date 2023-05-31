@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useCurrentUser } from '@/app/context/currentUserContext';
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const DailyPrize = ({ prize = 5000, disabled = false }) => {
     const [number, setNumber] = useState("00000");
@@ -45,6 +46,7 @@ const DailyPrize = ({ prize = 5000, disabled = false }) => {
             setTimeout(updateNumber, updateInterval);
         };
         toast('Your coins are added to your wallet!', {
+            delay: 2700,
             hideProgressBar: false,
             autoClose: 4600,
             type: "success",
@@ -54,11 +56,9 @@ const DailyPrize = ({ prize = 5000, disabled = false }) => {
         !disabled && updateNumber();
     };
 
-    console.log(number);
-    console.log(prize);
-
     return (
         <div>
+            <ToastContainer/>
         <svg width='544px' height='542.353px' xmlns='http://www.w3.org/2000/svg' xmlnsXlink='http://www.w3.org/1999/xlink'>
             <defs>
                 <filter x='-20.0%' y='-14.3%' width='140.0%' height='140.0%' filterUnits='objectBoundingBox' id='filter-2'>

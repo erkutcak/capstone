@@ -10,7 +10,11 @@ module.exports = async (req, res) => {
         include: {
             wallet: {
                 include: {
-                    transactions: true,
+                    transactions: {
+                        include: {
+                            game: true,
+                        }
+                    }
                 },
             },
         },
