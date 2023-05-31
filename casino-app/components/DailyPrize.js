@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const DailyPrize = ({ prize, disabled = false }) => {
-    const [number, setNumber] = useState("00000");
+    const [number, setNumber] = useState("💰" + "00000");
     const { currentUser, setCurrentUser } = useCurrentUser();
 
     const scrambleNumber = () => {
@@ -18,7 +18,7 @@ const DailyPrize = ({ prize, disabled = false }) => {
             setNumber(Math.floor(Math.random() * 90000) + 10000);
             updates++;
             if (updates >= maxUpdates) {
-                setNumber(String(prize).padStart(5, "0"));
+                setNumber("💰" + String(prize).padStart(5, "0"));
                 const updatedBalance = currentUser.wallet.balance + parseInt(prize)
                 setCurrentUser(prevUser => ({
                     ...prevUser,
@@ -104,8 +104,8 @@ const DailyPrize = ({ prize, disabled = false }) => {
                                 fill='#EFEFEF'
                                 fillRule='nonzero'
                             />
-                            <text id='Value' fontFamily='VCROSDMono, VCR OSD Mono' fontSize='81.9' fontWeight='normal' fill='#000'>
-                                <tspan x='86.4492969' y='167.643'>
+                            <text id='Value' fontFamily='Bungee' fontSize='70' fontWeight='normal' fill='#000'>
+                                <tspan x='46.4492969' y='160.643'>
                                     {number}
                                 </tspan>
                             </text>

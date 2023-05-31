@@ -66,3 +66,12 @@
     background-color: #0b0e1e;
     border-radius: 6px;
 }
+
+.navbar-balance {
+    background-color: azure;
+    border-radius: 20px;
+    padding: 2px 5px;
+    font-family: 'Bungee', sans-serif;
+    color: #141a36;
+    margin-top: 50px;
+}
