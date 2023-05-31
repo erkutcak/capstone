@@ -1,0 +1,180 @@
+.about-body {
+    display: flex;
+    flex-direction: column;
+    background-color: #232f62b9;
+    padding: 10px 20px;
+    margin: 20px 20px 0 220px;
+    border-radius: 20px;
+
+}
+
+.about-title {
+    text-align: center;
+    font-family: 'Monomaniac One';
+    letter-spacing: 1px;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.about-text {
+    font-family: 'Monomaniac One';
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+.name {
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Bruno Ace';
+    letter-spacing: 10px;
+    margin-top: 20px;
+}
+
+.about-socials {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 15px;
+}
+
+.about-logo {
+    width: 220px;
+}
+
+.flatiron-logo {
+    width: 250px;
+    height: auto;
+    border-radius: 20px;
+}
+
+.social-circle {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.up {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+}
+
+.down {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+}
+
+.card1 {
+    width: 90px;
+    height: 90px;
+    outline: none;
+    border: none;
+    background: white;
+    border-radius: 90px 5px 5px 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    transition: .2s ease-in-out;
+}
+
+.linkedin {
+    width: 30px;
+    margin-top: 40px;
+    margin-left: 2.2em;
+    fill: #cc39a4;
+}
+
+.card2 {
+    width: 90px;
+    height: 90px;
+    outline: none;
+    border: none;
+    background: white;
+    border-radius: 5px 90px 5px 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    transition: .2s ease-in-out;
+}
+
+.medium {
+    width: 50px;
+    margin-top: 30px;
+    margin-left: .8em;
+    fill: #03A9F4;
+}
+
+.card3 {
+    width: 90px;
+    height: 90px;
+    outline: none;
+    border: none;
+    background: white;
+    border-radius: 5px 5px 5px 90px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    transition: .2s ease-in-out;
+}
+
+.github {
+    width: 50px;
+    margin-top: 10px;
+    margin-left: 1.5em;
+}
+
+.card4 {
+    width: 90px;
+    height: 90px;
+    outline: none;
+    border: none;
+    background: white;
+    border-radius: 5px 5px 90px 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    transition: .2s ease-in-out;
+}
+
+.instagram {
+    width: 60px;
+    margin-top: 8px;
+    margin-left: 5px;
+    fill: #cc39a4;
+}
+
+.card1:hover {
+    cursor: pointer;
+    scale: 1.1;
+    background-color: #0077b5;
+}
+
+.card1:hover .linkedin {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.card2:hover {
+    cursor: pointer;
+    scale: 1.1;
+    background-color: black;
+}
+
+.card2:hover .medium {
+    fill: white;
+}
+
+.card3:hover {
+    cursor: pointer;
+    scale: 1.1;
+    background-color: purple;
+}
+
+.card3:hover .github {
+    fill: white;
+}
+
+.card4:hover {
+    cursor: pointer;
+    scale: 1.1;
+    background-color: #cc39a4;
+}
+
+.card4:hover .instagram {
+    fill: white;
+}
