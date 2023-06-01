@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useCurrentUser } from '@/app/context/currentUserContext';
 import { ToastContainer, toast } from "react-toastify";
+import "../app/styles/dailyprize.css"
 import "react-toastify/dist/ReactToastify.css";
 
 const DailyPrize = ({ prize, disabled = false }) => {

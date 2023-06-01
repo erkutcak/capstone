@@ -1,11 +1,12 @@
 .dash-title {
     margin: 20px 0 20px 220px;
     font-family: 'Bungee', sans-serif;
+    font-size: 20px;
     background-color: #daa520;
     height: 40px;
     width: 1000px;
     border-radius: 20px;
-    padding: 10px;
+    padding-top: 5px;
     text-align: center;
     color: #141a36;
 }
@@ -35,17 +36,32 @@
     padding: 10px;
     background-color: #232f62b9;
     color: white;
+    overflow: auto;
 }
 
 .daily-win-title {
     font-family: 'Bungee', sans-serif;
+    font-size: 25px;
     background-color: #daa520;
     height: 40px;
     width: 100%;
     border-radius: 20px;
-    padding: 10px;
+    padding-top: 2px;
     text-align: center;
     color: #141a36;
     margin-top: 10px;
     margin-bottom: 20px;
+}
+
+.leaderboard-list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #141a36;
+    margin-bottom: 5px;
+    list-style: auto;
+    padding: 5px 8px 5px 8px;
+    border-radius: 20px;
+    font-size: 20px;
+    font-family: 'Bungee', sans-serif;
 }

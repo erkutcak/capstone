@@ -6,6 +6,7 @@ import Spinner from './Spinner';
 import React, { useState, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function RepeatButton({ onClick }) {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);

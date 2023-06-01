@@ -212,7 +212,6 @@ export default function MemoryCards() {
             </div>
                 <p className='moves-left'>Moves Left: <br/>{moves} / 28</p>
             <div className="menu">
-                    {gameOver === true ? <h3 className='game-over'>GAME OVER!</h3> : null}
                     {gameWon === true ? <h3 className='congrats'>CONGRATULATIONS!</h3> : null}
             </div>
             {showPlayButton ? (

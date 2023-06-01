@@ -24,8 +24,8 @@ export default function Leaderboard() {
             <div>
             <ul>
                 {topList.map((user) => (
-                    <li key={user.id}>
-                        {user.username} | 💰{user.wallet.balance}
+                    <li key={user.id} className="leaderboard-list-item">
+                        {user.username} <span className="leaderboard-list-balance">💰{user.wallet.balance}</span>
                     </li>
                 ))}
             </ul>
