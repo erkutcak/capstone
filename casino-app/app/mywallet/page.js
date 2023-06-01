@@ -1,7 +1,6 @@
 'use client';
 
 import '../styles/wallet.css';
-import WheelOfCoins from '@/components/WheelOfCoins';
 import TransactionCard from '@/components/TransactionCard';
 import WalletCard from '@/components/WalletCard';
 import { useCurrentUser } from "@/app/context/currentUserContext";
@@ -10,10 +9,14 @@ import { motion } from 'framer-motion';
 export default function MyWallet() {
 
   const { currentUser, setCurrentUser } = useCurrentUser();
-    
-  const displayTransactions = currentUser.transactions.reverse().map((transaction) => {
+
+  const sortedTransactions = currentUser.transactions.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
+  
+  const displayTransactions = sortedTransactions.map((transaction) => {
       return <TransactionCard key={transaction.id} transaction={transaction} />
   })
+  console.log(displayTransactions);
+
 
   return (
   <motion.div

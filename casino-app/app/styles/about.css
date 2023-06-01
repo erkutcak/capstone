@@ -14,12 +14,14 @@
     letter-spacing: 1px;
     font-size: 30px;
     margin-bottom: 20px;
+    color: white;
 }
 
 .about-text {
     font-family: 'Monomaniac One';
     letter-spacing: 1px;
     font-size: 14px;
+    color: white;
 }
 
 .name {
@@ -28,6 +30,7 @@
     font-family: 'Bruno Ace';
     letter-spacing: 10px;
     margin-top: 20px;
+    color: white;
 }
 
 .about-socials {
