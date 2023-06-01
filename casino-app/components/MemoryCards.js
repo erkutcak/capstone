@@ -211,9 +211,6 @@ export default function MemoryCards() {
             <div className="menu">
             </div>
                 <p className='moves-left'>Moves Left: <br/>{moves} / 28</p>
-            <div className="menu">
-                    {gameWon === true ? <h3 className='congrats'>CONGRATULATIONS!</h3> : null}
-            </div>
             {showPlayButton ? (
                 <button onClick={handlePlayButtonClick} className="play-btn">
                     P L A Y

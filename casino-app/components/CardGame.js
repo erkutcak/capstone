@@ -9,6 +9,8 @@ import jsonData from "../deck.json"
 import { useCurrentUser } from '@/app/context/currentUserContext';
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const CardGame = () => {
     let GameState
@@ -343,6 +345,11 @@ const CardGame = () => {
         //   setBalance(Math.round((currentUser.wallet.balance + bet * 2) * 100) / 100)
         setCurrentUser({...currentUser, wallet: {...currentUser.wallet, balance: Math.round((currentUser.wallet.balance + bet * 2) * 100) / 100}})
         setMessage(Message.userWin)
+        toast(`Congrats! You won 💰${bet * 2}`, {
+            hideProgressBar: false,
+            autoClose: 4600,
+            type: "success",
+        });
         winCoins()
         transactionWin()
         } else if (dealerScore > userScore) {
@@ -358,6 +365,7 @@ const CardGame = () => {
 
     return (
         <div className='cardgame-main'>
+        <ToastContainer/>
         <motion.div
             className="box"
             initial={{ opacity: 0, scale: 0.5 }}
