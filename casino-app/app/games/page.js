@@ -1,42 +1,25 @@
-import prisma from "@/lib/prisma";
+'use client';
+
+import { motion } from 'framer-motion';
 import '../styles/games.css';
-import Link from "next/link";
-// import { motion } from "framer-motion";
+import AllGames from "@/components/AllGames";
 
 export default async function Games () {
-    const data = await prisma.game.findMany()
-
-    const showGames = data.map((game) => {
-        return (
-            <div className="game-title-card">
-                {/* <motion.div> */}
-                    <Link 
-                        href={{
-                            pathname: `games/${game.name}`,
-                            query:{id: game.id}
-                            
-                        }} 
-                        key={game.id}
-                    >
-                        <img className='game-image' src={game.image} alt="game-image" />
-                        <h1 className="game-title">{game.name}</h1>
-                        <p className="game-bio">{game.bio}</p>
-                        <button className="cssbuttons-io-button"> PLAY!
-                        <div className="icon">
-                            <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path></svg>
-                        </div>
-                        </button>
-                    </Link>
-                {/* </motion.div> */}
-            </div>
-        )
-    })
 
     return (
-        <div className="games-body">
-            <div className="games-cards">
-                {showGames}
+        <motion.div
+        className="box"
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+            duration: 0.5,
+            delay: 0.3,
+            ease: [0, 0.71, 0.2, 1.01]
+        }}
+        >
+            <div className="games-body">
+                <AllGames/>
             </div>
-        </div>
+        </motion.div>
     )
 }

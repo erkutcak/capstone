@@ -7,11 +7,14 @@ import home from '../public/home.png'
 import '../app/styles/navbar.css'
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useCurrentUser } from "@/app/context/currentUserContext";
+import { motion, useTime, useTransform } from "framer-motion";
 
 export default function Navbar () {
 
     const { user, error, isLoading } = useUser();
     const { currentUser } = useCurrentUser();
+    const time = useTime();
+    const rotate = useTransform(time, [0, 9000], [360, 0], { clamp: false });
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>{error.message}</div>;
@@ -23,9 +26,9 @@ export default function Navbar () {
     return (
         currentUser && (
         <div className="navbar">
-            <div className='logo-container'>
+            <motion.div className='logo-container' style={{ rotate }}>
                 <Image className='logo' src={logo} alt='high roller logo'/>
-            </div>
+            </motion.div>
             <Link href='/dashboard'>
                 <button className="nav-button">Home</button>
             </Link>
