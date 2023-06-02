@@ -182,7 +182,7 @@ function SlotMachine({setIsButtonDisabled}) {
             <ToastContainer/>
             <div className='slots-left'>
                 <h1 className='slots-title'>TASTY SLOT MACHINE</h1>
-                <p className='slots-bio'>Welcome to our delectable slot machine game filled with mouthwatering treats and delightful surprises! Get ready to indulge in a gaming experience that combines the excitement of spinning reels with an irresistible menu of tasty symbols.  <br /> <br />Prepare yourself for a culinary adventure as you encounter delicious slices of pizza, juicy cherries, savory burgers, creamy avocados, refreshing beers, ripe bananas, tropical pineapples, and golden corn. Each play is 50 coins.</p>
+                <p className='slots-bio'>Welcome to our delectable slot machine game filled with hotties and delightful surprises! Get ready to indulge in a gaming experience that combines the excitement of spinning reels with an irresistible list of tasty men.  <br /> <br />Prepare yourself for an adventure as you encounter delicious group of successful and good looking people. Each play is 50 coins.</p>
                 <h2 className='slot-balance'>Current Balance: <br /> 💰{currentUser.wallet.balance}</h2>
                 <h3 className='slot-balance'>Pot 💰2000</h3>
                 {winningSound}

@@ -34,7 +34,7 @@
 }
 
 .slots-bio {
-  font-size: 12px;
+  font-size: 14px;
   font-style: italic;
   color: #141a36;
   margin-bottom: 10px;
@@ -129,7 +129,7 @@
   width: 128px;
   height: 564px;
   overflow: hidden;
-  background: #fff url(https://andyhoffman.codes/random-assets/img/slots/sprite5.png) repeat-y;
+  background: #fff url(../../public/slotcard.png) repeat-y;
   will-change: backgroundPosition;
   transition: 0.3s background-position ease-in-out;
   padding: 0 80px;
